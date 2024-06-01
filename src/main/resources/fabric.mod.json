@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Juris Retro",
-  "description": "This mod aims to help new BTA modders.",
+  "description": "Juris Random Stuff",
   "authors": [
     "Kleiders"
   ],
@@ -28,7 +28,7 @@
 			"kleiders.jurisretro.JurisRetroMod"
 		],
 		"recipesReady": [
-			"kleiders.jurisretro.JurisRetroMod"
+			"kleiders.jurisretro.JurisRetroModRecipes"
 		]
 	},
   "mixins": [

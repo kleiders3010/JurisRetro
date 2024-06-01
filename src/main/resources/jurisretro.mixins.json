@@ -4,6 +4,7 @@
     "package": "kleiders.jurisretro.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
+      "BiomeMixin"
     ],
     "client": [
     ],
