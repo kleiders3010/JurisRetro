@@ -7,6 +7,7 @@ import kleiders.jurisretro.packets.PacketRideEntity;
 import net.minecraft.client.render.entity.LivingRenderer;
 import net.minecraft.client.render.entity.PlayerRenderer;
 import net.minecraft.client.render.model.ModelBase;
+import net.minecraft.core.achievement.stat.StatList;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -53,6 +54,23 @@ public class KleidersEntityPlayerMixin extends EntityLiving {
 		cir.setReturnValue(true);
 	}
 
+	@Inject(method = "causeFallDamage", remap = false, at = @At("HEAD"), cancellable = true)
+	protected void causeFallDamage(float f, CallbackInfo ci) {
+		EntityPlayer player = ((EntityPlayer) (Object) this);
+		if (((KleidersEntityExtensions) player).getExtraCustomData().getDouble("chickenTime") > 0) {
+			ci.cancel();
+		}
+	}
+
+	@Inject(method = "onLivingUpdate", remap = false, at = @At("HEAD"), cancellable = true)
+	public void onLiving(CallbackInfo ci) {
+		EntityPlayer player = ((EntityPlayer) (Object) this);
+		if (((KleidersEntityExtensions) player).getExtraCustomData().getDouble("chickenTime") > 0) {
+			if (!player.onGround && player.yd < 0.0) {
+				player.yd *= 0.6;
+			}
+		}
+	}
 
 
 	@Inject(method = "setupDwarfMode", remap = false, at = @At("HEAD"), cancellable = true)
