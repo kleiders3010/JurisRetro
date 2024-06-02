@@ -13,6 +13,7 @@ public class JurisRetroModRecipes implements RecipeEntrypoint {
 	public void initializeRecipes() {
 		RecipeBuilderShaped simpleAdditionRecipe = new RecipeBuilderShaped(JurisRetroMod.MOD_ID, "XY");
 		simpleAdditionRecipe.addInput('X', Item.paper).addInput('Y', Item.jar).create("airSpell", new ItemStack(JurisRetroModItems.air_spell, 1));
+		simpleAdditionRecipe.addInput('X', Item.paper).addInput('Y', JurisRetroModItems.chicken_pig_egg).create("transformationSpell", new ItemStack(JurisRetroModItems.transformation_spell, 1));
 	}
 
 	@Override

@@ -17,7 +17,7 @@ public class EntityChickenPig extends EntityChicken {
 
 	public EntityChickenPig(World world) {
 		super(world);
-		this.setSize(0.9F, 0.9F);
+		this.setSize(0.4F, 0.8F);
 		this.altMobDrops.add(new WeightedRandomLootObject(Item.foodPorkchopRaw.getDefaultStack(), 0, 1));
 		this.altMobDrops.add(new WeightedRandomLootObject(Item.featherChicken.getDefaultStack(), 0, 1));
 		this.burningMobDrops.add(new WeightedRandomLootObject(Item.foodPorkchopCooked.getDefaultStack(), 0, 1));

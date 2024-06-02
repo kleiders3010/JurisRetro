@@ -4,6 +4,9 @@ import com.mojang.nbt.CompoundTag;
 import kleiders.jurisretro.client.model.ChickenPigModel;
 import kleiders.jurisretro.entities.EntityChickenPig;
 import kleiders.jurisretro.entities.EntityChickenPigEgg;
+import kleiders.jurisretro.packets.PacketChangeData;
+import kleiders.jurisretro.packets.PacketChangeSize;
+import kleiders.jurisretro.packets.PacketRideEntity;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.gui.guidebook.mobs.MobInfoRegistry;
 import net.minecraft.client.render.entity.ChickenRenderer;
@@ -16,6 +19,7 @@ import net.minecraft.core.item.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import turniplabs.halplibe.helper.EntityHelper;
+import turniplabs.halplibe.helper.NetworkHelper;
 import turniplabs.halplibe.util.GameStartEntrypoint;
 import turniplabs.halplibe.util.RecipeEntrypoint;
 
@@ -33,6 +37,9 @@ public class JurisRetroMod implements ModInitializer, GameStartEntrypoint, Recip
 
 	@Override
 	public void beforeGameStart() {
+		PacketChangeData.addIdClassMapping(216, true, false, PacketChangeData.class);
+		PacketChangeData.addIdClassMapping(217, true, false, PacketRideEntity.class);
+		PacketChangeSize.addIdClassMapping(218, true, false, PacketChangeSize.class);
 		new JurisRetroModItems().initializeItems();
 		EntityHelper.createEntity(EntityChickenPigEgg.class, JurisRetroModConfig.entityID, "ChickenPig", () -> new SnowballRenderer(JurisRetroModItems.chicken_pig_egg));
 		EntityHelper.createEntity(EntityChickenPig.class, JurisRetroModConfig.entityID, "ChickenPig", () -> new ChickenRenderer(new ChickenPigModel(), 0.3F));

@@ -4,9 +4,14 @@
     "package": "kleiders.jurisretro.mixin",
     "compatibilityLevel": "JAVA_8",
     "mixins": [
-      "BiomeMixin"
+      "BiomeMixin",
+      "KleidersEntityMixin",
+      "KleidersNetHandlerMixin",
+      "KleidersEntityPlayerMixin"
     ],
     "client": [
+      "KleidersNetClientHandlerMixin",
+      "KleidersPlayerRendererMixin"
     ],
     "injectors": {
         "defaultRequire": 1

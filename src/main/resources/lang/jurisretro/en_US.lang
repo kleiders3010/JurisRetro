@@ -1,5 +1,8 @@
 item.juris_retro.air_spell.name=Air Spell
+item.juris_retro.air_spell.desc=Push enemies away
 item.juris_retro.chicken_pig_egg.name=Chicken Pig Egg
+item.juris_retro.chicken_pig_egg.desc=Can be used in a Transformation
+item.juris_retro.transformation_spell.name=Transformation Spell
+item.juris_retro.transformation_spell.desc=Transforms you into a Chicken Pig for 1 minute. Can Stack
 section.jurisretro.chicken_pig.name=Chicken Pig
 section.jurisretro.chicken_pig.desc=A strange but calm mix between a Chicken and a Pig
-item.jurisretro.spawnegg.chicken_pig.name=Chicken Pig
