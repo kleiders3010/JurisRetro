@@ -1,25 +1,38 @@
 package kleiders.jurisretro.mixin;
 
 import com.mojang.nbt.CompoundTag;
-import kleiders.jurisretro.JurisRetroMod;
-import kleiders.jurisretro.interfaces.KleidersEntityExtensions;
+import kleiders.jurisretro.interfaces.EntityExtensions;
 import kleiders.jurisretro.packets.PacketChangeData;
 import net.minecraft.core.entity.Entity;
+import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.world.World;
 import net.minecraft.server.MinecraftServer;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
-public class KleidersEntityMixin implements KleidersEntityExtensions {
+public class EntityMixin implements EntityExtensions {
 	@Shadow
 	public World world;
 
+	@Shadow
+	public float heightOffset;
+	@Shadow
+	public float bbHeight;
+	@Shadow
+	public float ySlideOffset;
+	@Shadow
+	@Final
+	public AABB bb;
+	@Shadow
+	public double y;
+	@Shadow
+	public boolean slide;
 	@Unique
 	private CompoundTag juris$extraCustomData;
 
@@ -34,11 +47,24 @@ public class KleidersEntityMixin implements KleidersEntityExtensions {
 		}
 	}
 
+
+
 	@Unique
 	@Override
 	public void syncExtraCustomData() {
 		if (!this.world.isClientSide && MinecraftServer.getInstance() != null) {
 			MinecraftServer.getInstance().playerList.sendPacketToAllPlayersInDimension(new PacketChangeData(((Entity) (Object) this), juris$extraCustomData), this.world.dimension.id);
+		}
+	}
+
+	@Inject(method = "move", remap = false, at = @At(value = "HEAD"))
+	public void atMove(double x, double y, double z, CallbackInfo ci) {
+		Entity player = ((Entity) (Object) this);
+		if (((EntityExtensions) player).getExtraCustomData().getDouble("chickenTime") > 0) {
+			//this.heightOffset = 1.4F;
+			this.bb.maxY = this.y - 1F;
+		} else {
+			//this.bb.maxY = this.y;
 		}
 	}
 

@@ -5,13 +5,20 @@
     "compatibilityLevel": "JAVA_8",
     "mixins": [
       "BiomeMixin",
-      "KleidersEntityMixin",
-      "KleidersNetHandlerMixin",
-      "KleidersEntityPlayerMixin"
+      "EntityMixin",
+      "NetHandlerMixin",
+      "EntityPlayerMixin",
+      "EntityTrackerMixin",
+      "EntityTrackerEntryMixin",
+      "LivingEntityMixin",
+      "EntityPlayerSPMixin",
+      "BlockFarmlandMixin",
     ],
     "client": [
-      "KleidersNetClientHandlerMixin",
-      "KleidersPlayerRendererMixin"
+      "NetClientHandlerMixin",
+      "PlayerRendererMixin",
+      "EntityCameraMixin",
+      "WorldRendererMixin"
     ],
     "injectors": {
         "defaultRequire": 1

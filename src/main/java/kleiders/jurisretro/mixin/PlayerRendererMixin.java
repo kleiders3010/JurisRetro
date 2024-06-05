@@ -1,38 +1,30 @@
 package kleiders.jurisretro.mixin;
 
 import kleiders.jurisretro.client.model.ChickenPigModel;
-import kleiders.jurisretro.client.renderer.KleidersChickenRenderer;
-import kleiders.jurisretro.interfaces.KleidersEntityExtensions;
+import kleiders.jurisretro.interfaces.EntityExtensions;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.render.LightmapHelper;
-import net.minecraft.client.render.entity.ChickenRenderer;
 import net.minecraft.client.render.entity.LivingRenderer;
 import net.minecraft.client.render.entity.PlayerRenderer;
 import net.minecraft.client.render.model.ModelBase;
 import net.minecraft.core.Global;
-import net.minecraft.core.entity.SpawnListEntry;
-import net.minecraft.core.entity.animal.EntityChicken;
 import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.world.biome.Biome;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.List;
-
 @Mixin(value = PlayerRenderer.class, remap = false)
-public class KleidersPlayerRendererMixin extends LivingRenderer<EntityPlayer> {
+public class PlayerRendererMixin extends LivingRenderer<EntityPlayer> {
 
-	public KleidersPlayerRendererMixin(ModelBase modelbase, float f) {
+	public PlayerRendererMixin(ModelBase modelbase, float f) {
 		super(modelbase, f);
 	}
 
 	@Inject(method = "render", remap = false, at = @At("HEAD"), cancellable = true)
 	private void onRender(EntityPlayer entity, double x, double y, double z, float yaw, float partialTick, CallbackInfo ci) {
-		if (((KleidersEntityExtensions) entity).getExtraCustomData().getDouble("chickenTime") > 0) {
+		if (((EntityExtensions) entity).getExtraCustomData().getDouble("chickenTime") > 0) {
 			if (Minecraft.getMinecraft(this).thePlayer == entity) {
 				y -= 1.62;//1.62;
 			}

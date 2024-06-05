@@ -1,11 +1,9 @@
 package kleiders.jurisretro.packets;
 
-import com.mojang.nbt.CompoundTag;
-import kleiders.jurisretro.interfaces.KleidersNetHandlerPackets;
+import kleiders.jurisretro.interfaces.NetHandlerPacketsExtensions;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.net.handler.NetHandler;
 import net.minecraft.core.net.packet.Packet;
-import net.minecraft.core.world.IVehicle;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -37,7 +35,7 @@ public class PacketRideEntity extends Packet {
 	}
 
 	public void processPacket(NetHandler netHandler) {
-		((KleidersNetHandlerPackets) netHandler).handleRideEntity(this);
+		((NetHandlerPacketsExtensions) netHandler).handleRideEntity(this);
 	}
 
 	public int getPacketSize() {

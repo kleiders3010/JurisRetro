@@ -3,9 +3,8 @@ package kleiders.jurisretro.interfaces;
 import kleiders.jurisretro.packets.PacketChangeData;
 import kleiders.jurisretro.packets.PacketChangeSize;
 import kleiders.jurisretro.packets.PacketRideEntity;
-import net.minecraft.core.net.packet.Packet63SpawnParticleEffect;
 
-public interface KleidersNetHandlerPackets {
+public interface NetHandlerPacketsExtensions {
 
 	default void handleChangeData(PacketChangeData packetChangeData) {
 		throw new RuntimeException("this should be overridden via mixin. what?");

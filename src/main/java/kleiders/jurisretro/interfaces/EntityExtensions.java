@@ -2,7 +2,7 @@ package kleiders.jurisretro.interfaces;
 
 import com.mojang.nbt.CompoundTag;
 
-public interface KleidersEntityExtensions {
+public interface EntityExtensions {
 		default CompoundTag getExtraCustomData() {
 			throw new RuntimeException("this should be overridden via mixin. what?");
 		}

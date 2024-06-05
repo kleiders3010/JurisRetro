@@ -1,32 +1,16 @@
 package kleiders.jurisretro;
 
 import kleiders.jurisretro.entities.EntityChickenPigEgg;
-import kleiders.jurisretro.interfaces.KleidersEntityExtensions;
 import kleiders.jurisretro.items.AirSpellItem;
 import kleiders.jurisretro.items.TransformationSpellItem;
-import kleiders.jurisretro.mixin.KleidersEntityMixin;
-import net.minecraft.client.entity.player.EntityClientPlayerMP;
-import net.minecraft.core.entity.Entity;
-import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
-import net.minecraft.core.item.Item;
-import net.minecraft.core.item.ItemEgg;
-import net.minecraft.core.item.ItemPlaceable;
-import net.minecraft.core.item.ItemStack;
-import net.minecraft.core.net.packet.Packet14BlockDig;
-import net.minecraft.core.net.packet.Packet63SpawnParticleEffect;
-import net.minecraft.core.sound.SoundCategory;
+import net.minecraft.core.item.*;
+import net.minecraft.core.item.material.ArmorMaterial;
+import net.minecraft.core.util.collection.NamespaceID;
 import net.minecraft.core.util.helper.DamageType;
-import net.minecraft.core.util.helper.MathHelper;
-import net.minecraft.core.util.helper.Side;
-import net.minecraft.core.util.phys.AABB;
-import net.minecraft.core.util.phys.Vec3d;
 import net.minecraft.core.world.World;
-import net.minecraft.server.MinecraftServer;
 import turniplabs.halplibe.helper.ItemBuilder;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Random;
 
 public class JurisRetroModItems {
@@ -36,6 +20,9 @@ public class JurisRetroModItems {
 	public static Item air_spell;
 	public static Item chicken_pig_egg;
 	public static Item transformation_spell;
+	public static Item spider_boots;
+	public static ArmorMaterial spider;
+	public static Item spider_mother_leather;
 
 	private int nextItemID(String itemName) {
 		return JurisRetroModConfig.cfg.getInt("Item IDs." + itemName);
@@ -69,6 +56,13 @@ public class JurisRetroModItems {
 		transformation_spell = new ItemBuilder(MOD_ID)
 			.setIcon("jurisretro:item/transformation_spell")
 			.build(new TransformationSpellItem("transformation_spell", nextItemID("transformation_spell")));
+		spider = ArmorMaterial.register((new ArmorMaterial(new NamespaceID("jurisretro", "spider"), 0, 240)).withProtectionPercentage(DamageType.COMBAT, 20.0F).withProtectionPercentage(DamageType.BLAST, 20.0F).withProtectionPercentage(DamageType.FIRE, 20.0F).withProtectionPercentage(DamageType.FALL, 240.0F));
+		spider_boots = new ItemBuilder(MOD_ID)
+			.setIcon("jurisretro:item/spider_boots")
+			.build(new ItemArmor("spider_boots", nextItemID("spider_boots"), JurisRetroModItems.spider, 3)).setMaxStackSize(1);
+		spider_mother_leather = new ItemBuilder(MOD_ID)
+			.setIcon("jurisretro:item/spider_mother_leather")
+			.build(new Item("spider_mother_leather", nextItemID("spider_mother_leather")));
 	}
 
 

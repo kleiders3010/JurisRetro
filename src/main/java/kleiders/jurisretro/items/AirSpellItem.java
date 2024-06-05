@@ -1,7 +1,5 @@
 package kleiders.jurisretro.items;
 
-import kleiders.jurisretro.JurisRetroMod;
-import kleiders.jurisretro.interfaces.KleidersEntityExtensions;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
@@ -35,7 +33,7 @@ public class AirSpellItem extends Item {
 			if (!world.isClientSide && MinecraftServer.getInstance() != null) {
 				MinecraftServer.getInstance().playerList.sendPacketToAllPlayersInDimension(new Packet63SpawnParticleEffect("explode", entityplayer.x + (random.nextFloat() * 3) - (random.nextFloat() * 3), entityplayer.y - 0.25 + (random.nextFloat() * 0.2) - (random.nextFloat() * 0.2),
 					entityplayer.z + (random.nextFloat() * 3) - (random.nextFloat() * 3), 0, 0.12, 0, 0), world.dimension.id);
-			} else if (MinecraftServer.getInstance() == null) {
+			} else {
 				world.spawnParticle("explode", entityplayer.x + (random.nextFloat() * 3) - (random.nextFloat() * 3), entityplayer.y - 1 + (random.nextFloat() * 0.2) - (random.nextFloat() * 0.2),
 						entityplayer.z + (random.nextFloat() * 3) - (random.nextFloat() * 3), 0, 0.12,0, 0);
 			}

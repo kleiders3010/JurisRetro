@@ -1,11 +1,10 @@
 package kleiders.jurisretro.packets;
 
 import com.mojang.nbt.CompoundTag;
-import kleiders.jurisretro.interfaces.KleidersNetHandlerPackets;
+import kleiders.jurisretro.interfaces.NetHandlerPacketsExtensions;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.net.handler.NetHandler;
 import net.minecraft.core.net.packet.Packet;
-import net.minecraft.core.util.helper.MathHelper;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -40,7 +39,7 @@ public class PacketChangeData extends Packet {
 	}
 
 	public void processPacket(NetHandler netHandler) {
-		((KleidersNetHandlerPackets) netHandler).handleChangeData(this);
+		((NetHandlerPacketsExtensions) netHandler).handleChangeData(this);
 	}
 
 	public int getPacketSize() {

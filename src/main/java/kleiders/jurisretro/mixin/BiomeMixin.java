@@ -1,7 +1,9 @@
 package kleiders.jurisretro.mixin;
 
 import kleiders.jurisretro.entities.EntityChickenPig;
+import kleiders.jurisretro.entities.EntitySpiderMother;
 import net.minecraft.core.entity.SpawnListEntry;
+import net.minecraft.core.entity.monster.EntitySpider;
 import net.minecraft.core.world.biome.Biome;
 import net.minecraft.core.world.biome.Biomes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -27,6 +29,7 @@ public class BiomeMixin {
 	private void addMobs(CallbackInfo ci) {
 		Biome biome = (Biome) (Object) this;
 		if (biome != Biomes.NETHER_NETHER) {
+			spawnableMonsterList.add(new SpawnListEntry(EntitySpiderMother.class, 4));
 			spawnableCreatureList.add(new SpawnListEntry(EntityChickenPig.class, 85));
 		}
 	}
