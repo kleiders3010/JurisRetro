@@ -2,6 +2,7 @@ package kleiders.jurisretro;
 
 import kleiders.jurisretro.entities.EntityChickenPigEgg;
 import kleiders.jurisretro.items.AirSpellItem;
+import kleiders.jurisretro.items.IceSpellItem;
 import kleiders.jurisretro.items.TransformationSpellItem;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.*;
@@ -23,6 +24,7 @@ public class JurisRetroModItems {
 	public static Item spider_boots;
 	public static ArmorMaterial spider;
 	public static Item spider_mother_leather;
+	public static Item ice_spell;
 
 	private int nextItemID(String itemName) {
 		return JurisRetroModConfig.cfg.getInt("Item IDs." + itemName);
@@ -63,6 +65,9 @@ public class JurisRetroModItems {
 		spider_mother_leather = new ItemBuilder(MOD_ID)
 			.setIcon("jurisretro:item/spider_mother_leather")
 			.build(new Item("spider_mother_leather", nextItemID("spider_mother_leather")));
+		ice_spell = new ItemBuilder(MOD_ID)
+			.setIcon("jurisretro:item/ice_spell")
+			.build(new IceSpellItem("ice_spell", nextItemID("ice_spell")));
 	}
 
 

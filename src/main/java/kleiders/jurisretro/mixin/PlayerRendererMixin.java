@@ -92,7 +92,7 @@ public class PlayerRendererMixin extends LivingRenderer<EntityPlayer> {
 					}
 				}
 
-				this.renderEquippedItems(entity, partialTick);
+				//this.renderEquippedItems(entity, partialTick);
 				float f9 = entity.getBrightness(partialTick);
 				if (Global.accessor.isFullbrightEnabled() || LightmapHelper.isLightmapEnabled()) {
 					f9 = 1.0F;

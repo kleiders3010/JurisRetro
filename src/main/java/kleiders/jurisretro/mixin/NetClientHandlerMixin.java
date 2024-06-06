@@ -1,6 +1,7 @@
 package kleiders.jurisretro.mixin;
 
 import kleiders.jurisretro.entities.EntityChickenPigEgg;
+import kleiders.jurisretro.entities.EntityIceSpell;
 import kleiders.jurisretro.interfaces.EntityExtensions;
 import kleiders.jurisretro.interfaces.NetHandlerPacketsExtensions;
 import kleiders.jurisretro.packets.PacketChangeData;
@@ -32,6 +33,23 @@ public abstract class NetClientHandlerMixin implements NetHandlerPacketsExtensio
 		Entity newEntity = null;
 		if (packet23vehiclespawn.type == 102) {
 			newEntity = new EntityChickenPigEgg(this.worldClient, xPosition, yPosition, zPosition);
+			if (newEntity != null) {
+				((Entity)newEntity).serverPosX = packet23vehiclespawn.xPosition;
+				((Entity)newEntity).serverPosY = packet23vehiclespawn.yPosition;
+				((Entity)newEntity).serverPosZ = packet23vehiclespawn.zPosition;
+				((Entity)newEntity).yRot = packet23vehiclespawn.yaw;
+				((Entity)newEntity).xRot = packet23vehiclespawn.pitch;
+				((Entity)newEntity).id = packet23vehiclespawn.entityId;
+				this.worldClient.addEntityToWorld(packet23vehiclespawn.entityId, (Entity)newEntity);
+				if (packet23vehiclespawn.ownerId > 0) {
+					Entity entity;
+					((Entity)newEntity).lerpMotion((double)packet23vehiclespawn.xVelocity / 8000.0, (double)packet23vehiclespawn.yVelocity / 8000.0, (double)packet23vehiclespawn.zVelocity / 8000.0);
+				}
+			}
+			cir.cancel();
+		}
+		if (packet23vehiclespawn.type == 103) {
+			newEntity = new EntityIceSpell(this.worldClient, xPosition, yPosition, zPosition);
 			if (newEntity != null) {
 				((Entity)newEntity).serverPosX = packet23vehiclespawn.xPosition;
 				((Entity)newEntity).serverPosY = packet23vehiclespawn.yPosition;

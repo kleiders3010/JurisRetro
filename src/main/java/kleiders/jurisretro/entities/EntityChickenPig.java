@@ -33,6 +33,7 @@ public class EntityChickenPig extends EntityChicken {
 		}
 		super.onLivingUpdate();
 	}
+
 	@Override
 	protected String getHurtSound() {
 		return "mob.pig";

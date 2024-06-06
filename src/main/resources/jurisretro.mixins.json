@@ -12,7 +12,8 @@
       "EntityTrackerEntryMixin",
       "LivingEntityMixin",
       "EntityPlayerSPMixin",
-      "BlockFarmlandMixin"
+      "BlockFarmlandMixin",
+      "EntityZombieMixin"
     ],
     "client": [
       "NetClientHandlerMixin",

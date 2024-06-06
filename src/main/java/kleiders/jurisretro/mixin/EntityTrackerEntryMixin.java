@@ -1,6 +1,7 @@
 package kleiders.jurisretro.mixin;
 
 import kleiders.jurisretro.entities.EntityChickenPigEgg;
+import kleiders.jurisretro.entities.EntityIceSpell;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.net.packet.Packet;
@@ -23,6 +24,11 @@ public class EntityTrackerEntryMixin {
 			EntityLiving entityliving;
 			entityliving = ((EntityChickenPigEgg)this.trackedEntity).owner;
 			cir.setReturnValue(new Packet23VehicleSpawn(this.trackedEntity, 102, entityliving == null ? this.trackedEntity.id : entityliving.id));
+		}
+		if (this.trackedEntity instanceof EntityIceSpell) {
+			EntityLiving entityliving;
+			entityliving = ((EntityIceSpell)this.trackedEntity).owner;
+			cir.setReturnValue(new Packet23VehicleSpawn(this.trackedEntity, 103, entityliving == null ? this.trackedEntity.id : entityliving.id));
 		}
 	}
 }
