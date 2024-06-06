@@ -48,7 +48,7 @@ public class LivingEntityMixin {
 			this.baseSpeed = living.speed;
 			if (((EntityExtensions) living).getExtraCustomData().getDouble("iceSlowness") > 0) {
 				((EntityExtensions) living).getExtraCustomData().putDouble("iceSlowness", ((EntityExtensions) living).getExtraCustomData().getDouble("iceSlowness") - 1);
-				living.speed *= 0.2;
+				living.speed *= 0.4;
 				Random random = new Random();
 				float height = living.bbHeight;
 				if (!living.world.isClientSide && MinecraftServer.getInstance() != null) {

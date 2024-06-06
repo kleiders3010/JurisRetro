@@ -14,12 +14,20 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = PlayerRenderer.class, remap = false)
 public class PlayerRendererMixin extends LivingRenderer<EntityPlayer> {
 
 	public PlayerRendererMixin(ModelBase modelbase, float f) {
 		super(modelbase, f);
+	}
+
+	@Inject(method = "shouldRenderPass(Lnet/minecraft/core/entity/player/EntityPlayer;IF)Z", remap = false, at = @At("HEAD"), cancellable = true)
+	protected void onShouldRenderPass(EntityPlayer entity, int renderPass, float partialTick, CallbackInfoReturnable<Boolean> ci) {
+		if (((EntityExtensions) entity).getExtraCustomData().getDouble("chickenTime") > 0) {
+			ci.setReturnValue(false);
+		}
 	}
 
 	@Inject(method = "render", remap = false, at = @At("HEAD"), cancellable = true)
