@@ -6,6 +6,8 @@
 - Minecraft Development plugin (Optional, but highly recommended)
 
 ## Some Info
+Made for BTA 7.2-pre1
+
 I sometimes make this mod in my free time to just add random stuff I think about. I am experienced Minecraft Mod Developer
 with over 5 years of experience on the modern versions of Minecraft, but wanted to see what it's like to work an older version.
 
