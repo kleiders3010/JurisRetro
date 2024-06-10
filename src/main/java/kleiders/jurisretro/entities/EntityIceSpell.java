@@ -58,6 +58,10 @@ public class EntityIceSpell extends EntityProjectile {
 			if (hitResult.entity.hurt(this.owner, this.damage, DamageType.COMBAT)) {
 				((EntityExtensions) hitResult.entity).getExtraCustomData().putDouble("iceSlowness", 150);
 				((EntityExtensions) hitResult.entity).syncExtraCustomData();
+				if (hitResult.entity instanceof EntityIceZombie) {
+					((EntityExtensions) hitResult.entity).getExtraCustomData().putDouble("iceTicks", 300);
+					((EntityExtensions) hitResult.entity).syncExtraCustomData();
+				}
 			}
 		}
 		Random random = new Random();
