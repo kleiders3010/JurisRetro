@@ -1,5 +1,6 @@
 package kleiders.jurisretro.items;
 
+import net.minecraft.core.Global;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.player.EntityPlayer;
 import net.minecraft.core.item.Item;
@@ -22,20 +23,31 @@ public class AirSpellItem extends Item {
 		super(name, id);
 	}
 
-	public ItemStack onItemRightClick(ItemStack itemstack, World world, EntityPlayer entityplayer) {
-		ItemStack retVal = super.onItemRightClick(itemstack, world, entityplayer);
+	public ItemStack onUseItem(ItemStack itemstack, World world, EntityPlayer entityplayer) {
+		ItemStack retVal = super.onUseItem(itemstack, world, entityplayer);
 
 		//world.netHandler.addToSendQueue(new Packet14BlockDig(1, x, y, z, side));
 
 		itemstack.consumeItem(entityplayer);
 		for (int index0 = 0; index0 < 90; index0++) {
 			Random random = new Random();
-			if (!world.isClientSide && MinecraftServer.getInstance() != null) {
-				MinecraftServer.getInstance().playerList.sendPacketToAllPlayersInDimension(new Packet63SpawnParticleEffect("explode", entityplayer.x + (random.nextFloat() * 3) - (random.nextFloat() * 3), entityplayer.y - 0.25 + (random.nextFloat() * 0.2) - (random.nextFloat() * 0.2),
-					entityplayer.z + (random.nextFloat() * 3) - (random.nextFloat() * 3), 0, 0.12, 0, 0), world.dimension.id);
+			if (Global.isServer && MinecraftServer.getInstance() != null) {
+				MinecraftServer.getInstance().playerList.sendPacketToAllPlayersInDimension(
+				    new Packet63SpawnParticleEffect(
+				        "explode",
+				        entityplayer.x + (random.nextFloat() * 3) - (random.nextFloat() * 3),
+				        entityplayer.y - 0.25 + (random.nextFloat() * 0.2) - (random.nextFloat() * 0.2),
+					    entityplayer.z + (random.nextFloat() * 3) - (random.nextFloat() * 3), 0, 0.12, 0, 0),
+					    world.dimension.id
+					);
 			} else {
-				world.spawnParticle("explode", entityplayer.x + (random.nextFloat() * 3) - (random.nextFloat() * 3), entityplayer.y - 1 + (random.nextFloat() * 0.2) - (random.nextFloat() * 0.2),
-						entityplayer.z + (random.nextFloat() * 3) - (random.nextFloat() * 3), 0, 0.12,0, 0);
+				world.spawnParticle(
+				    "explode",
+				    entityplayer.x + (random.nextFloat() * 3) - (random.nextFloat() * 3),
+				    entityplayer.y - 1 + (random.nextFloat() * 0.2) - (random.nextFloat() * 0.2),
+					entityplayer.z + (random.nextFloat() * 3) - (random.nextFloat() * 3),
+					0, 0.12, 0, 0
+				);
 			}
 		}
 		world.playSoundEffect(entityplayer, SoundCategory.ENTITY_SOUNDS, entityplayer.x, entityplayer.y, entityplayer.z, "random.pop", 1, 1);

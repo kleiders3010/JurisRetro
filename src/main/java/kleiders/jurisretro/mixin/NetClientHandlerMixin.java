@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(NetClientHandler.class)
+@Mixin(value = NetClientHandler.class, remap = false)
 public abstract class NetClientHandlerMixin implements NetHandlerPacketsExtensions {
 	@Shadow
 	public abstract Entity getEntityByID(int i);

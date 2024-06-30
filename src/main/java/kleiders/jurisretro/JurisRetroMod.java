@@ -25,29 +25,25 @@ import turniplabs.halplibe.util.RecipeEntrypoint;
 
 
 public class JurisRetroMod implements ModInitializer, GameStartEntrypoint, RecipeEntrypoint {
-    public static final String MOD_ID = "juris_retro";
+    public static final String MOD_ID = "jurisretro";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
     @Override
     public void onInitialize() {
         LOGGER.info(MOD_ID + "initialized.");
     }
 
-
-
-
 	@Override
 	public void beforeGameStart() {
+		new JurisRetroModItems().initializeItems();
 		PacketChangeData.addIdClassMapping(216, true, false, PacketChangeData.class);
 		PacketChangeData.addIdClassMapping(217, true, false, PacketRideEntity.class);
 		PacketChangeSize.addIdClassMapping(218, true, false, PacketChangeSize.class);
-		new JurisRetroModItems().initializeItems();
-		new JurisRetroModEntities().initializeEntities();
 	}
 
 
 	@Override
 	public void afterGameStart() {
-
+		new JurisRetroModEntities().initializeEntities();
 	}
 
 	@Override
