@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
-@Mixin(EntityZombie.class)
+@Mixin(value = EntityZombie.class, remap = false)
 public class EntityZombieMixin {
 
 	@Redirect(method = "onLivingUpdate", remap = false, at = @At(value = "FIELD", target = "Lnet/minecraft/core/entity/monster/EntityZombie;remainingFireTicks:I"))

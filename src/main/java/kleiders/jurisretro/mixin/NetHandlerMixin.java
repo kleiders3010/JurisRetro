@@ -8,7 +8,7 @@ import net.minecraft.core.net.handler.NetHandler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 
-@Mixin(NetHandler.class)
+@Mixin(value = NetHandler.class, remap = false)
 public class NetHandlerMixin implements NetHandlerPacketsExtensions {
 
 

@@ -3,6 +3,7 @@ package kleiders.jurisretro.mixin;
 import kleiders.jurisretro.JurisRetroMod;
 import kleiders.jurisretro.JurisRetroModItems;
 import kleiders.jurisretro.interfaces.EntityExtensions;
+import net.minecraft.core.Global;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.player.EntityPlayer;
@@ -51,7 +52,7 @@ public class LivingEntityMixin {
 				living.speed *= 0.4;
 				Random random = new Random();
 				float height = living.bbHeight;
-				if (!living.world.isClientSide && MinecraftServer.getInstance() != null) {
+				if (Global.isServer && MinecraftServer.getInstance() != null) {
 					MinecraftServer.getInstance().playerList.sendPacketToAllPlayersInDimension(new Packet63SpawnParticleEffect("snowshovel", living.x + (random.nextFloat() * 1) - (random.nextFloat() * 1), living.y + (height / 2) + (random.nextFloat() * (height / 2)) - (random.nextFloat() * (height / 2)),
 						living.z + (random.nextFloat() * 1) - (random.nextFloat() * 1), 0, -0.12, 0, 0), living.world.dimension.id);
 				} else {

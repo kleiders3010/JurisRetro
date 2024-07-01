@@ -4,6 +4,7 @@ import kleiders.jurisretro.entities.EntityIceZombie;
 import kleiders.jurisretro.interfaces.EntityExtensions;
 import kleiders.jurisretro.packets.PacketChangeSize;
 import kleiders.jurisretro.packets.PacketRideEntity;
+import net.minecraft.core.Global;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.entity.EntityLiving;
 import net.minecraft.core.entity.monster.EntityZombie;
@@ -42,7 +43,7 @@ public class EntityPlayerMixin extends EntityLiving {
 		EntityPlayer player = ((EntityPlayer) (Object) this);
 		if (((EntityExtensions) player).getExtraCustomData().getDouble("chickenTime") > 0 && ((EntityExtensions) otherplayer).getExtraCustomData().getDouble("chickenTime") <= 0) {
 			otherplayer.startRiding(player);
-			if (!player.world.isClientSide && MinecraftServer.getInstance() != null) {
+			if (Global.isServer && MinecraftServer.getInstance() != null) {
 				MinecraftServer.getInstance().playerList.sendPacketToAllPlayersInDimension(new PacketRideEntity(otherplayer, player), player.world.dimension.id);
 			}
 		}
@@ -80,7 +81,9 @@ public class EntityPlayerMixin extends EntityLiving {
 		if (cir.getReturnValue() && attacker instanceof EntityIceZombie) {
 			EntityPlayer player = ((EntityPlayer) (Object) this);
 			((EntityExtensions) player).getExtraCustomData().putDouble("iceSlowness", 100);
-			((EntityExtensions) player).syncExtraCustomData();
+			if (Global.isServer) {
+    			((EntityExtensions) player).syncExtraCustomData();
+			}
 		}
 	}
 
@@ -92,14 +95,14 @@ public class EntityPlayerMixin extends EntityLiving {
 			((EntityExtensions) player).getExtraCustomData().putDouble("iceSlowness", ((EntityExtensions) player).getExtraCustomData().getDouble("iceSlowness") - 1);
 			player.speed *= 0.8;
 			Random random = new Random();
-			if (!player.world.isClientSide && MinecraftServer.getInstance() != null) {
+			if (Global.isServer && MinecraftServer.getInstance() != null) {
 				MinecraftServer.getInstance().playerList.sendPacketToAllPlayersInDimension(new Packet63SpawnParticleEffect("snowshovel", player.x + (random.nextFloat() * 1) - (random.nextFloat() * 1), player.y + 0.25 + (random.nextFloat() * 0.2) - (random.nextFloat() * 0.2),
 					player.z + (random.nextFloat() * 1) - (random.nextFloat() * 1), 0, -0.12, 0, 0), world.dimension.id);
 			} else {
 				player.world.spawnParticle("snowshovel", player.x + (random.nextFloat() * 1) - (random.nextFloat() * 1), player.y - 0.25 + (random.nextFloat() * 0.2) - (random.nextFloat() * 0.2),
 					player.z + (random.nextFloat() * 1) - (random.nextFloat() * 1), 0, -0.12,0, 0);
 			}
-			if (((EntityExtensions) player).getExtraCustomData().getDouble("iceSlowness") <= 0) {
+			if (((EntityExtensions) player).getExtraCustomData().getDouble("iceSlowness") <= 0 && Global.isServer) {
 				((EntityExtensions) player).syncExtraCustomData();
 			}
 		}
@@ -112,9 +115,9 @@ public class EntityPlayerMixin extends EntityLiving {
 			((EntityExtensions) player).getExtraCustomData().putDouble("chickenTime", ((EntityExtensions) player).getExtraCustomData().getDouble("chickenTime") - 1);
 			if (!isChicken) {
 				this.setSize(0.6F, 0.7F);
-				((EntityExtensions) player).syncExtraCustomData();
 				isChicken = true;
-				if (!player.world.isClientSide && MinecraftServer.getInstance() != null) {
+				if (Global.isServer && MinecraftServer.getInstance() != null) {
+    				((EntityExtensions) player).syncExtraCustomData();
 					MinecraftServer.getInstance().playerList.sendPacketToAllPlayersInDimension(new PacketChangeSize(player, true), player.world.dimension.id);
 				}
 			}
@@ -123,8 +126,8 @@ public class EntityPlayerMixin extends EntityLiving {
 				this.setSize(0.6F, 1.8F);
 				isChicken = false;
 				isDwarf = false;
-				((EntityExtensions) player).syncExtraCustomData();
-				if (!player.world.isClientSide && MinecraftServer.getInstance() != null) {
+				if (Global.isServer && MinecraftServer.getInstance() != null) {
+    				((EntityExtensions) player).syncExtraCustomData();
 					MinecraftServer.getInstance().playerList.sendPacketToAllPlayersInDimension(new PacketChangeSize(player, false), player.world.dimension.id);
 				}
 			}

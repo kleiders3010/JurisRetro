@@ -3,6 +3,7 @@ package kleiders.jurisretro.mixin;
 import com.mojang.nbt.CompoundTag;
 import kleiders.jurisretro.interfaces.EntityExtensions;
 import kleiders.jurisretro.packets.PacketChangeData;
+import net.minecraft.core.Global;
 import net.minecraft.core.entity.Entity;
 import net.minecraft.core.util.phys.AABB;
 import net.minecraft.core.world.World;
@@ -15,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(Entity.class)
+@Mixin(value = Entity.class, remap = false)
 public class EntityMixin implements EntityExtensions {
 	@Shadow
 	public World world;
@@ -52,7 +53,7 @@ public class EntityMixin implements EntityExtensions {
 	@Unique
 	@Override
 	public void syncExtraCustomData() {
-		if (!this.world.isClientSide && MinecraftServer.getInstance() != null) {
+		if (Global.isServer && MinecraftServer.getInstance() != null) {
 			MinecraftServer.getInstance().playerList.sendPacketToAllPlayersInDimension(new PacketChangeData(((Entity) (Object) this), juris$extraCustomData), this.world.dimension.id);
 		}
 	}

@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(EntityTrackerEntry.class)
+@Mixin(value = EntityTrackerEntry.class, remap = false)
 public class EntityTrackerEntryMixin {
 	@Shadow
 	public Entity trackedEntity;
