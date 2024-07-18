@@ -30,6 +30,7 @@ public class LivingEntityMixin {
 
 	@Inject(method = "canClimb", at = @At(value = "RETURN"), cancellable = true)
 	public void hasBoots(CallbackInfoReturnable<Boolean> cir) {
+	    if (cir.getReturnValue()) return;
 		if (((EntityLiving) (Object) this) instanceof EntityPlayer && ((EntityPlayer) (Object) this).inventory.armorInventory[0] != null && ((EntityPlayer) (Object) this).inventory.armorInventory[0].getItem() == JurisRetroModItems.spider_boots) {
 		//	int i = MathHelper.floor_double(((EntityLiving) (Object) this).x);
 		//	int j = MathHelper.floor_double(((EntityLiving) (Object) this).bb.minY);
